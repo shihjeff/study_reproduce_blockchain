@@ -4,12 +4,20 @@ import "./paperset.sol";
 
 contract PaperHelper is PaperSet {
 
-  function incVerifCount(uint _dataId) external notOwnerOf(_dataId) {
-    datas[_dataId].verifCount++;
+  uint weiFee = 5000000;
+
+  function setWeiFee(uint _fee) external onlyOwner {
+    weiFee = _fee;
   }
 
-  function incUnverifCount(uint _dataId) external notOwnerOf(_dataId) {
+  function incVerifCount(uint _dataId) external notOwnerOfData(_dataId) {
+    datas[_dataId].verifCount++;
+    msg.sender.transfer(weiFee);
+  }
+
+  function incUnverifCount(uint _dataId) external notOwnerOfData(_dataId) {
     datas[_dataId].unverifCount++;
+    msg.sender.transfer(weiFee);
   }
 
   function getDatasByOwner(address _owner) external view returns(uint[]) {
@@ -36,5 +44,16 @@ contract PaperHelper is PaperSet {
     return result;
   }
 
+  function getDatasByPaper(uint paperId) external view OwnerOfPaper(paperId) returns(uint[]) {
+    uint[] memory result = new uint[](paperDataCount[paperId]);
+    uint counter = 0;
+    for (uint i = 0; i < datas.length; i++) {
+      if (DataToPaper[i] == paperId) {
+        result[counter] = i;
+        counter++;
+      }
+    }
+    return result;
+  }
 
 }

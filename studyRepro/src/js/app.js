@@ -8,14 +8,14 @@ App = {
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
 
-      for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].testParameter);
-       // petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].testParameter);
-        petTemplate.find('.pet-age').text(data[i].fields);
-       // petTemplate.find('.pet-location').text(data[i].location);
-       // petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
 
+      for (i = 0; i < data.length; i ++) {
+        if(data[i].fields != "Personality Psycology") {
+          continue;
+        }
+          petTemplate.find('.panel-title').text(data[i].testParameter);
+          petTemplate.find('.pet-breed').text(data[i].testParameter);
+          petTemplate.find('.pet-age').text(data[i].fields);
         petsRow.append(petTemplate.html());
       }
     });

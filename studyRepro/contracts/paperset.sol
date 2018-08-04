@@ -47,7 +47,7 @@ contract PaperSet is DataSet {
     paperToOwner[id] = msg.sender;
     ownerPaperCount[msg.sender]++;
     paperDataCount[id] = 0;
-    NewPaper(id, _thesis, _conclusion, _field);
+    emit NewPaper(id, _thesis, _conclusion, _field);
   }
 
   function _createDataForPaper(uint paperId, string _testparam, string _testresult, string _field) internal {

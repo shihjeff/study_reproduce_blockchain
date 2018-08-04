@@ -23,7 +23,7 @@ contract DataSet is Ownable {
     uint id = datas.push(Data(_testparam, _testresult, _field, 0, 0)) - 1;
     dataToOwner[id] = msg.sender;
     ownerDataCount[msg.sender]++;
-    emit NewData(id, _testparam, _testresult);
+    NewData(id, _testparam, _testresult);
     return id;
   }
 

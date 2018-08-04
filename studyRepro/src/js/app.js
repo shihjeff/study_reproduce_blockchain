@@ -4,10 +4,9 @@ App = {
 
   init: function() {
     // Load pets.
-    $.getJSON('../pets.json', function(data) {
+    $.getJSON('../data.json', function(data) {
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
-
 
       for (i = 0; i < data.length; i ++) {
         if(data[i].fields != "Personality Psycology") {
@@ -19,6 +18,16 @@ App = {
         petsRow.append(petTemplate.html());
       }
     });
+
+      $.getJSON('../data.json', function(data) {
+          var petsRow = $('#pprow');
+          var petTemplate = $('#ppTemplate');
+          for (i = 0; i < data.length; i ++) {
+              petTemplate.find('.panel-title').text(data[i].fields);
+              petsRow.append(petTemplate.html());
+          }
+      });
+
 
     return App.initWeb3();
   },

@@ -44,7 +44,7 @@ contract PaperHelper is PaperSet {
     return result;
   }
 
-  function getDatasByPaper(uint paperId) external view OwnerOfPaper(paperId) returns(uint[]) {
+  function getDatasByPaper(uint paperId) external view onlyOwnerOfPaper(paperId) returns(uint[]) {
     uint[] memory result = new uint[](paperDataCount[paperId]);
     uint counter = 0;
     for (uint i = 0; i < datas.length; i++) {

@@ -6,13 +6,23 @@ contract PaperSet is DataSet {
 
   event NewPaper(uint dataId, string thesis, string conclusion, string paperfield);
 
-  modifier onlyOwnerOf(uint _dataId) {
+  modifier onlyOwnerOfData(uint _dataId) {
     require(msg.sender == dataToOwner[_dataId]);
     _;
   }
 
-  modifier notOwnerOf(uint _dataId) {
+  modifier notOwnerOfData(uint _dataId) {
     require(msg.sender != dataToOwner[_dataId]);
+    _;
+  }
+
+  modifier onlyOwnerOfPaper(uint _paperId) {
+    require(msg.sender == paperToOwner[_paperId]);
+    _;
+  }
+
+  modifier notOwnerOfPaper(uint _paperId) {
+    require(msg.sender != paperToOwner[_paperId]);
     _;
   }
 

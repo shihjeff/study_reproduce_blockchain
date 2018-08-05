@@ -7,14 +7,14 @@
   },
   {
     "testId": 1,
-    "testParameter": "Gina",
-    "testResult": "test",
+    "testParameter": "Caffeine on athletic performance",
+    "testResult": "Caffeine does not appear to benefit short term, high intensity exercise",
     "fields": "Sports Psychology"
   },
   {
     "testId": 3,
-    "testParameter": "Creativity of people in different temperature",
-    "testResult": "People is more creative in temperature less than 60F",
+    "testParameter": "Behaviorial learning theories: Contiguity",
+    "testResult": "Student making a good grade on a test after trying several different study techniques",
     "fields": "Educational Psychology"
   },
   {
@@ -25,14 +25,20 @@
   },
   {
     "testId": 5,
-    "testParameter": "Creativity of people in different temperature",
-    "testResult": "People is more creative in temperature less than 60F",
+    "testParameter": "Personalities and marrige",
+    "testResult": "People tend to marry individuals with similar personalities",
     "fields": "Personality Psycology"
   },
   {
     "testId": 6,
-    "testParameter": "Gina",
-    "testResult": "test",
+    "testParameter": "Sports and heart disease",
+    "testResult": "Causes of sudden cardiac death in young athletes",
     "fields": "Sports Psychology"
+  },
+  {
+    "testId": 7,
+    "testParameter": "People and Pet",
+    "testResult": "Children love bigger size dog",
+    "fields": "Personality Psycology"
   }
 ]

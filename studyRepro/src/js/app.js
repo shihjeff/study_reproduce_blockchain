@@ -3,7 +3,7 @@ App = {
   contracts: {},
 
   init: function() {
-    // Load pets.
+    // Load data.
     $.getJSON('../data.json', function(data) {
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
@@ -12,19 +12,25 @@ App = {
         if(data[i].fields != "Personality Psycology") {
           continue;
         }
-          petTemplate.find('.panel-title').text(data[i].testParameter);
-          petTemplate.find('.pet-breed').text(data[i].testParameter);
-          petTemplate.find('.pet-age').text(data[i].fields);
-        petsRow.append(petTemplate.html());
+          petTemplate.find('.pet-para').text(data[i].testParameter);
+          petTemplate.find('.pet-result').text(data[i].testResult);
+          petTemplate.find('.pet-fields').text(data[i].fields);
+
+          petsRow.append(petTemplate.html());
       }
     });
 
       $.getJSON('../data.json', function(data) {
-          var petsRow = $('#pprow');
-          var petTemplate = $('#ppTemplate');
+          var dataRow = $('#pprow');
+          var dataTemplate = $('#ppTemplate');
+          var unique = [];
           for (i = 0; i < data.length; i ++) {
-              petTemplate.find('.panel-title').text(data[i].fields);
-              petsRow.append(petTemplate.html());
+              if(unique.includes(data[i].fields)) {
+                continue;
+              }
+              dataTemplate.find('.panel-title').text(data[i].fields);
+              dataRow.append(dataTemplate.html());
+              unique.push(data[i].fields);
           }
       });
 

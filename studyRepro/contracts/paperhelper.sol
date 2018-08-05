@@ -56,8 +56,8 @@ contract PaperHelper is PaperSet {
     return result;
   }
 
-  function getAllPapers() external view returns(Paper[]) {
-   return papers;
- }
+  function getPaperMetabyIdx(uint paperId) external view returns(string,string,string) {
+    return (papers[paperId].Thesis, papers[paperId].Conclusion, papers[paperId].PaperField);
+  }
 
 }

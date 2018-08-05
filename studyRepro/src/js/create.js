@@ -1,3 +1,10 @@
+const IPFS = require("ipfs-api");
+const ipfs = new IPFS({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https"
+});
+
 App = {
   web3Provider: null,
   contracts: {},
@@ -49,7 +56,12 @@ App = {
       console.log(id);
       return PaperHelperInstance._createDataForPaper(id,parameters,conclusion,field);
     }).then(function(field) {
-      window.open('index.html');
+      ipfs.add(field, (err, hash) => {
+        if (err) {
+          return console.log(err);
+        }
+         console.log("HASH: ", hash);
+      });
     }).catch((err) => {
       console.error(err);
     });

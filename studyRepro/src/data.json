@@ -25,8 +25,8 @@
   },
   {
     "testId": 4,
-    "testParameter": "Gina",
-    "testResult": "test",
+    "testParameter": "Elementry School Education",
+    "testResult": "People with age less than 5 in elementry school has higher study creativity",
     "fields": "School Psychology",
     "verification": "0",
     "unverification": "0"
@@ -54,5 +54,13 @@
     "fields": "Personality Psycology",
     "verification": "1",
     "unverification": "0"
+  },
+  {
+    "testId": 8,
+    "testParameter": "High School Education",
+    "testResult": "People are motivated to change how you feel and your feeling is associated with a specific facial expression",
+    "fields": "School Psychology",
+    "verification": "0",
+    "unverification": "1"
   }
 ]

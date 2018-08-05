@@ -33,9 +33,8 @@ App = {
 
     render: function() {
         var verificationInstance;
-        var testPara = $("#testpara");
-        var testResult = $("#petresult");
-        var testField = $("#fieldName");
+        var petsRow = $('#petsRow');
+        var petTemplate = $('#petTemplate');
 
         web3.eth.getCoinbase(function(err, account) {
             if(err === null) {
@@ -46,88 +45,47 @@ App = {
 
         App.contracts.PaperHelper.deployed().then(function(instance) {
             verificationInstance = instance;
-            var paperList = verificationInstance.papers;
-            var dataList = verificationInstance.datas;
-            for(var i = 0; i < paperList.length; i ++) {
-                if(paperList[i].PaperField != testField) {
-                    continue;
-                }
-                var testList = verificationInstance.getDatasByPaper(i);
-                for(var j = 0; j < testList.length; j ++) {
-                    testPara.append(testList[j].TestParameters);
-                    testResult.append(testList[j].TestResults);
-                }
+            var paperIdxList = verificationInstance.getPaperIdxbyField(testField);
+            var dataIdxList = [];
+            for(var i = 0; i < paperIdxList.length; i ++) {
+                dataIdxList.push(verificationInstance.getDatasByPaper(paperIdxList[i]));
+            }
+
+            for(var j = 0; j < dataIdxList.length + 1; j++) {
+                var testData = verificationInstance.getDataMetabyIdx(dataIdxList[j]);
+                petTemplate.find(".pet-para").text(testData.TestParameters);
+                petTemplate.find(".pet-result").text(testData.TestResults);
+                petTemplate.find(".pet-fields").text(testData.Field);
+                petTemplate.find('.btn-verify').html("<button onclick=\"App.handleVerify('" + dataIdxList[j] + "')\" class=\"btn btn-default btn-verify\" type=\"button\" data-id=\"0\">Verified</button>");
+                petTemplate.find('.btn-unverify').html("<button onclick=\"App.handleUnverify('" + dataIdxList[j] + "')\" class=\"btn btn-default btn-unverify\" type=\"button\" data-id=\"0\">Verified</button>");
+                petsRow.append(petTemplate.html());
             }
         }).catch(function(error) {
             console.warn(error);
         });
-        
-        return App.bindEvents(dataList);
     },
 
-    bindEvents: function(dataList) {
-        $(document).on('click', '.btn-verify', App.handleVerify(dataList));
-        $(document).on('click', '.btn-unverify', App.handleUnverify(dataList));
-    },
-
-    handleVerify: function (event, dataList) {
-        event.preventDefault();
-        for(var i = 0; i < dataList.length; i++) {
-            if()
-        }
-
+    handleVerify: function (event) {
+        var verifyEventInstance;
+        // count ++
+        App.contracts.PaperHelper.deployed().then(function(instance) {
+            verifyEventInstance = instance;
+            verifyEventInstance.incVerifCount(event);
+        }).catch(function(error) {
+            console.warn(error);
+        });
     },
 
     handleUnverify: function (event) {
-        event.preventDefault();
-
+        var verifyEventInstance;
+        // count --
+        App.contracts.PaperHelper.deployed().then(function(instance) {
+            verifyEventInstance = instance;
+            verifyEventInstance.incUnverifCount(event);
+        }).catch(function(error) {
+            console.warn(error);
+        });
     }
-    //
-    // markAdopted: function(adopters, account) {
-    //     var adoptionInstance;
-    //
-    //     App.contracts.Adoption.deployed().then(function(instance) {
-    //         adoptionInstance = instance;
-    //
-    //         return adoptionInstance.getAdopters.call();
-    //     }).then(function(adopters) {
-    //         for (i = 0; i < adopters.length; i++) {
-    //             if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
-    //                 $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
-    //             }
-    //         }
-    //     }).catch(function(err) {
-    //         console.log(err.message);
-    //     });
-    // },
-    //
-    // handleAdopt: function(event) {
-    //     event.preventDefault();
-    //
-    //     var petId = parseInt($(event.target).data('id'));
-    //
-    //     var adoptionInstance;
-    //
-    //     web3.eth.getAccounts(function(error, accounts) {
-    //         if (error) {
-    //             console.log(error);
-    //         }
-    //
-    //         var account = accounts[0];
-    //
-    //         App.contracts.Adoption.deployed().then(function(instance) {
-    //             adoptionInstance = instance;
-    //
-    //             // Execute adopt as a transaction by sending account
-    //             return adoptionInstance.adopt(petId, {from: account});
-    //         }).then(function(result) {
-    //             return App.markAdopted();
-    //         }).catch(function(err) {
-    //             console.log(err.message);
-    //         });
-    //     });
-    // }
-
 };
 
 $(function() {

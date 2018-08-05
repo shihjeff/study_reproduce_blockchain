@@ -1,5 +1,6 @@
 App = {
   web3Provider: null,
+  contracts: {},
 
   init: function() {
     return App.initWeb3();

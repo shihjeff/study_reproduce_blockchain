@@ -10,13 +10,13 @@ Problem: To publish new research, there are many barriers.  There’s a large ba
 
 Solution: Use the public nature and coin mining properties of blockchain to address both barriers.  One can publish any result (positive or negative) on blockchain for the world to learn from successes & mistakes (no just successes).  The coin mining incentivizes folks to share more information (good or bad). [BEYOND MVP]  Since all data is public, one can mine data sets of interests and come up with new conclusions without new experiments.
 
-##Platforms
+## Platforms
 * Quarkchain
 * Truffle
 * Ganache
 * MetaMask
 
-##Tools + Libraries
+## Tools + Libraries
 * Truffle
 * Truffle Cat Shop Unbox
 * Ownership

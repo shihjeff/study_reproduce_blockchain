@@ -1,5 +1,5 @@
 # study_reproduce_blockchain
-# Team Nerfherder
+### Team Nerfherder
 Eric Frankel, Jeff Chen, Yidan Sun, Yiming Li, Rico Chen
 
 ### Install Ganache

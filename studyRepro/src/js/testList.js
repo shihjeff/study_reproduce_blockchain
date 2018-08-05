@@ -30,6 +30,7 @@ App = {
             // Use our contract to retrieve and mark the adopted pets
             return App.render();
         });
+
     },
 
     render: function() {

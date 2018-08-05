@@ -23,15 +23,15 @@ App = {
             var title = getUrlParameter('title');
             var petsRow = $('#petsRow');
             var petTemplate = $('#petTemplate');
-
+            $('#secondPage').text(title);
             for (i = 0; i < data.length; i ++) {
                 if(data[i].fields != title) {
                     continue;
                 }
-                petTemplate.find('.pet-para').text(data[i].testParameter);
+
+                petTemplate.find('#pet-para').text(data[i].testParameter);
                 petTemplate.find('.pet-result').text(data[i].testResult);
                 petTemplate.find('.pet-fields').text(data[i].fields);
-
                 petsRow.append(petTemplate.html());
             }
         });
@@ -57,80 +57,109 @@ App = {
     initWeb3: function() {
         if (typeof web3 !== 'undefined') {
             App.web3Provider = web3.currentProvider;
+            web3 = new Web3(web3.currentProvider);
         } else {
             // If no injected web3 instance is detected, fall back to Ganache
             App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+            web3 = new Web3(App.web3Provider);
         }
-        web3 = new Web3(App.web3Provider);
 
         return App.initContract();
     },
-
     initContract: function() {
-        $.getJSON('Adoption.json', function(data) {
+        $.getJSON('PaperHelper.json', function(data) {
             // Get the necessary contract artifact file and instantiate it with truffle-contract
-            var AdoptionArtifact = data;
-            App.contracts.Adoption = TruffleContract(AdoptionArtifact);
+            App.contracts.PaperHelper = TruffleContract(data);
 
             // Set the provider for our contract
-            App.contracts.Adoption.setProvider(App.web3Provider);
+            App.contracts.PaperHelper.setProvider(App.web3Provider);
 
             // Use our contract to retrieve and mark the adopted pets
-            return App.markAdopted();
+            return App.render();
         });
 
-        return App.bindEvents();
     },
 
-    bindEvents: function() {
-        $(document).on('click', '.btn-adopt', App.handleAdopt);
-    },
+    render: function() {
+        var verificationInstance;
+        var petsRow = $('#petsRow');
+        var petTemplate = $('#petTemplate');
 
-    markAdopted: function(adopters, account) {
-        var adoptionInstance;
+        //get field name from url
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
 
-        App.contracts.Adoption.deployed().then(function(instance) {
-            adoptionInstance = instance;
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
 
-            return adoptionInstance.getAdopters.call();
-        }).then(function(adopters) {
-            for (i = 0; i < adopters.length; i++) {
-                if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
-                    $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
                 }
             }
-        }).catch(function(err) {
-            console.log(err.message);
+        };
+
+        //field name
+        var testField = getUrlParameter('title');
+
+        //get account address
+        web3.eth.getCoinbase(function(err, account) {
+            if(err === null) {
+                App.account = account;
+                $("#accountAddress").html("Your Account: " + account);
+            }
+        });
+
+        petTemplate.find('#pet-para').text("test parameter");
+        petTemplate.find(".pet-result").text("result");
+        petTemplate.find(".pet-fields").text("fields");
+        petsRow.append(petTemplate.html());
+
+        App.contracts.PaperHelper.deployed().then(function(instance) {
+            verificationInstance = instance;
+            var paperIdxList = verificationInstance.getPaperIdxbyField(testField);
+            var dataIdxList = [];
+            for(var i = 0; i < paperIdxList.length; i ++) {
+                dataIdxList.push(verificationInstance.getDatasByPaper(paperIdxList[i]));
+            }
+
+            for(var j = 0; j < dataIdxList.length; j++) {
+                var testData = verificationInstance.getDataMetabyIdx(dataIdxList[j]);
+                petTemplate.find('#pet-para').text(testData[0]);
+                petTemplate.find(".pet-result").text(testData[1]);
+                petTemplate.find(".pet-fields").text(testData[2]);
+                petTemplate.find('.btn-verify').html("<button onclick=\"App.handleVerify('" + dataIdxList[j] + "')\" class=\"btn btn-default btn-verify\" type=\"button\" data-id=\"0\">Verified</button>");
+                petTemplate.find('.btn-unverify').html("<button onclick=\"App.handleUnverify('" + dataIdxList[j] + "')\" class=\"btn btn-default btn-unverify\" type=\"button\" data-id=\"0\">Verified</button>");
+                petsRow.append(petTemplate.html());
+            }
+        }).catch(function(error) {
+            console.warn(error);
         });
     },
 
-    handleAdopt: function(event) {
-        event.preventDefault();
+    handleVerify: function (event) {
+        var verifyEventInstance;
+        // count ++
+        App.contracts.PaperHelper.deployed().then(function(instance) {
+            verifyEventInstance = instance;
+            verifyEventInstance.incVerifCount(event);
+        }).catch(function(error) {
+            console.warn(error);
+        });
+    },
 
-        var petId = parseInt($(event.target).data('id'));
-
-        var adoptionInstance;
-
-        web3.eth.getAccounts(function(error, accounts) {
-            if (error) {
-                console.log(error);
-            }
-
-            var account = accounts[0];
-
-            App.contracts.Adoption.deployed().then(function(instance) {
-                adoptionInstance = instance;
-
-                // Execute adopt as a transaction by sending account
-                return adoptionInstance.adopt(petId, {from: account});
-            }).then(function(result) {
-                return App.markAdopted();
-            }).catch(function(err) {
-                console.log(err.message);
-            });
+    handleUnverify: function (event) {
+        var verifyEventInstance;
+        // count --
+        App.contracts.PaperHelper.deployed().then(function(instance) {
+            verifyEventInstance = instance;
+            verifyEventInstance.incUnverifCount(event);
+        }).catch(function(error) {
+            console.warn(error);
         });
     }
-
 };
 
 $(function() {

@@ -56,4 +56,8 @@ contract PaperHelper is PaperSet {
     return result;
   }
 
+  function getAllPapers() external view returns(Paper[]) {
+   return papers;
+ }
+
 }

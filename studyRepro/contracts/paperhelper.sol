@@ -60,6 +60,11 @@ contract PaperHelper is PaperSet {
     return (papers[paperId].Thesis, papers[paperId].Conclusion, papers[paperId].PaperField);
   }
 
+  function getDataMetabyIdx(uint dataId) external view returns(string,string,string, uint16, uint16) {
+    return (datas[dataId].TestParameters, datas[dataId].TestResults,
+      datas[dataId].Field, datas[dataId].verifCount, datas[dataId].unverifCount);
+  }
+
   function getPaperIdxbyField(string field) external view returns(uint[]) {
     uint counter = 0;
     uint i = 0;

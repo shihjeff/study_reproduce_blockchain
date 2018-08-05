@@ -3,22 +3,37 @@ App = {
   contracts: {},
 
   init: function() {
-    // Load pets.
-    $.getJSON('../pets.json', function(data) {
+    // Load data.
+    $.getJSON('../data.json', function(data) {
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
 
       for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
+        if(data[i].fields != "Personality Psycology") {
+          continue;
+        }
+          petTemplate.find('.pet-para').text(data[i].testParameter);
+          petTemplate.find('.pet-result').text(data[i].testResult);
+          petTemplate.find('.pet-fields').text(data[i].fields);
 
-        petsRow.append(petTemplate.html());
+          petsRow.append(petTemplate.html());
       }
     });
+
+      $.getJSON('../data.json', function(data) {
+          var dataRow = $('#pprow');
+          var dataTemplate = $('#ppTemplate');
+          var unique = [];
+          for (i = 0; i < data.length; i ++) {
+              if(unique.includes(data[i].fields)) {
+                continue;
+              }
+              dataTemplate.find('.panel-title').text(data[i].fields);
+              dataRow.append(dataTemplate.html());
+              unique.push(data[i].fields);
+          }
+      });
+
 
     return App.initWeb3();
   },

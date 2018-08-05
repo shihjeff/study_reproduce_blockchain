@@ -112,11 +112,6 @@ App = {
             }
         });
 
-        petTemplate.find('#pet-para').text("test parameter");
-        petTemplate.find(".pet-result").text("result");
-        petTemplate.find(".pet-fields").text("fields");
-        petsRow.append(petTemplate.html());
-
         App.contracts.PaperHelper.deployed().then(function(instance) {
             verificationInstance = instance;
             var paperIdxList = verificationInstance.getPaperIdxbyField(testField);

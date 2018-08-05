@@ -3,12 +3,36 @@
     "author": "elaine",
     "papers": [
       {
-        "title": "paper1",
-        "ranking": 9.99
+        "title": "Perceptual symbols of creativity: Coldness elicits referential, warmth elicits relational creativity",
+        "ranking": 38.5
       },
       {
-        "title": "paper2",
-        "ranking": 9.9
+        "title": "The Psychology of Limitations: How and Why Constraints Can Make You More Creative",
+        "ranking": 37.3
+      },
+      {
+        "title": "Creativity is something you practice, not just a talent you’re born with.",
+        "ranking": 36
+      },
+      {
+        "title": "How to Wake Up To Your Creativity",
+        "ranking": 35
+      },
+      {
+        "title": "Every Innovation is a New Thing but not Every New Thing is an Innovation",
+        "ranking": 28
+      },
+      {
+        "title": "Design Guidelines for Context-Aware Creativity Support Systems",
+        "ranking": 25
+      },
+      {
+	"title": "The Complex Personality of Creative People",
+        "ranking": 25
+      },
+      {
+        "title": "Cultural Production, Creativity and Constraints",
+        "ranking": 16.7
       }
     ]
   }

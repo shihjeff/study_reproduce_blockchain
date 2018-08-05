@@ -37,7 +37,12 @@ App = {
     web3.eth.getCoinbase(function(err, account) {
 	if(err === null) {
 	  App.account = account;
-	}
+	  if (account == null){
+             $('#author').text('Author: ' + '0xE3172d53de447acc5D0C810e224410AaE23C804A');
+          } else {
+             $('#author').text('Author: ' + account);
+          }
+        }
     });
 
     // Load contract data

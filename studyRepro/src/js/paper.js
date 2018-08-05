@@ -8,14 +8,22 @@ App = {
   },
 
   initWeb3: function() {
-    if (typeof web3 === 'undefined') {
-      const msg = "Couldn't detect web3. Make sure MetaMask is installed.";
-      alert(msg);
-      console.error(msg);
-      return;
-    }
-    QuarkChain.injectWeb3(web3, "http://jrpc.testnet.quarkchain.io:38391");
-    web3 = new Web3(App.web3Provider);
+    // if (typeof web3 === 'undefined') {
+    //   const msg = "Couldn't detect web3. Make sure MetaMask is installed.";
+    //   alert(msg);
+    //   console.error(msg);
+    //   return;
+    // }
+    // QuarkChain.injectWeb3(web3, "http://jrpc.testnet.quarkchain.io:38391");
+
+      if (typeof web3 !== 'undefined') {
+          App.web3Provider = web3.currentProvider;
+          web3 = new Web3(web3.currentProvider);
+      } else {
+          // If no injected web3 instance is detected, fall back to Ganache
+          App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+          web3 = new Web3(App.web3Provider);
+      }
 
     return App.initContract();
   },
@@ -35,14 +43,7 @@ App = {
     var PaperHelperInstance;
 
     web3.eth.getCoinbase(function(err, account) {
-	if(err === null) {
-	  App.account = account;
-	  if (account == null){
-             $('#author').text('Author: ' + '0xE3172d53de447acc5D0C810e224410AaE23C804A');
-          } else {
-             $('#author').text('Author: ' + account);
-          }
-        }
+        $('#author').text('Author: ' + account);
     });
 
     // Load contract data

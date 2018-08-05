@@ -51,6 +51,8 @@ App = {
                 unique.push(data[i].fields);
             }
         });
+
+
         return App.initWeb3();
     },
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Fields</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12">
+          <h2>New Paper</h2>
+
+          <div class="form-group">
+            <label for="field">Paper Subject</label>
+            <input type="text" id="field" name="field" class="form-control" placeholder="e.g. Psychology" required minlength="1" maxlength="44" autocomplete="off">
+            <label for="thesis">Thesis</label>
+            <input type="text" id="thesis" name="thesis" class="form-control"  required minlength="1" autocomplete="off">
+            <label for="conclusion">Conclusion</label>
+            <input type="text" id="conclusion" name="conclusion" class="form-control" required minlength="1" autocomplete="off">
+          </div>
+
+          <h3>Paper Data</h3>
+
+          <div class="form-group">
+            <label for="parameters">Test Parameters</label>
+            <input type="text" id="parameters" name="parameters" class="form-control" autocomplete="off">
+            <label for="results">Test Results</label>
+            <input type="text" id="results" name="results" class="form-control" autocomplete="off">
+          </div>
+
+          <div class="text-center">
+            <button class="btn submit-button btn-primary">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span></span>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/web3.min.js"></script>
+<script src="js/truffle-contract.js"></script>
+<script src="js/create.js"></script>
+</body>
+</html>

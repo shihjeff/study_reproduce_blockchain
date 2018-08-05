@@ -42,12 +42,13 @@ contract PaperSet is DataSet {
   mapping (uint => uint) public paperDataCount;
   mapping (uint => uint) public DataToPaper;
 
-  function _createPaper(string _thesis, string _conclusion, string _field) external {
+  function _createPaper(string _thesis, string _conclusion, string _field) external returns(uint) {
     uint id = papers.push(Paper(_thesis, _conclusion, _field)) - 1;
     paperToOwner[id] = msg.sender;
     ownerPaperCount[msg.sender]++;
     paperDataCount[id] = 0;
     emit NewPaper(id, _thesis, _conclusion, _field);
+    return id;
   }
 
   function _createDataForPaper(uint paperId, string _testparam, string _testresult, string _field) external {

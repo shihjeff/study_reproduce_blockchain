@@ -20,30 +20,30 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON("PaperSet.json", function(paperSet) {
+    $.getJSON("PaperHelper.json", function(paperHelper) {
       // Instantiate a new truffle contract from the artifact
-      App.contracts.PaperSet = TruffleContract(paperSet);
+      App.contracts.PaperHelper = TruffleContract(paperHelper);
       // Connect provider to interact with contract
-      App.contracts.PaperSet.setProvider(App.web3Provider);
+      App.contracts.PaperHelper.setProvider(App.web3Provider);
 
       return App.render();
     });
   },
 
   render: function() {
-    var paperSetInstance;
+    var PaperHelperInstance;
 
     // Load contract data
-    App.contracts.PaperSet.deployed().then(function(instance) {
-      paperSetInstance = instance;
-      return paperSetInstance.papers;
+    App.contracts.PaperHelper.deployed().then(function(instance) {
+      PaperHelperInstance = instance;
+      return PaperHelperInstance.papers;
     }).then(function(papers) {
       console.log(papers);
       $('#myTable').append('<table id="here_table"></table>');
       var table = $('#myTable').children();
       table.append("<tr class='header'><th style='width:6%;'>Thesis</th><th style='width:6%;'>Ranking</th></tr>")
       for (var i = 0; i < papers.length; i++) {
-         table.append( '<tr><td>' + papers[i] + '</td>' + '<td>' + 1 + '</td></tr>'); 
+         table.append( '<tr><td>' + papers[i] + '</td>' + '<td>' + 1 + '</td></tr>');
       }
     }).catch(function(error) {
       console.warn(error);
@@ -78,6 +78,6 @@ function myFunction() {
       } else {
         tr[i].style.display = "none";
       }
-    }       
+    }
   }
 }

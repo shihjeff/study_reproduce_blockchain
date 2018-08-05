@@ -3,11 +3,11 @@
     "author": "elaine",
     "papers": [
       {
-        "title": "Perceptual symbols of creativity: Coldness elicits referential, warmth elicits relational creativity",
-        "ranking": 10
+        "title": "Teaching with the Brain in Mind",
+        "ranking": 6
       },
       {
-        "title": "The Psychology of Limitations: How and Why Constraints Can Make You More Creative",
+        "title": "Education and Psychology in Interaction: Working with Uncertainty in Interconnected Fields",
         "ranking": 0
       },
       {
@@ -33,6 +33,10 @@
       {
         "title": "Cultural Production, Creativity and Constraints",
         "ranking": 12.3
+      },
+      {
+        "title": "Teaching with the Brain in Mind",
+        "ranking": 9.5
       }
     ]
   }

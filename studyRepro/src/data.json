@@ -62,5 +62,29 @@
     "fields": "School Psychology",
     "verification": "0",
     "unverification": "1"
+  },
+  {
+    "testId": 9,
+    "testParameter": "Students personality in High school education",
+    "testResult": "Students in high school with higher confidence would easier to get better grades",
+    "fields": "School Psychology",
+    "verification": "7",
+    "unverification": "1"
+  },
+  {
+    "testId": 10,
+    "testParameter": "Replationship between Education and Psychology in changing social",
+    "testResult": "Students in high school with higher confidence would easier to get better grades",
+    "fields": "Educational Psychology",
+    "verification": "7",
+    "unverification": "1"
+  },
+  {
+    "testId": 11,
+    "testParameter": "Sport confidence and motivation",
+    "testResult": "People are easily to lose confidence or motivation after an injury",
+    "fields": "Sports Psychology",
+    "verification": "7",
+    "unverification": "1"
   }
 ]

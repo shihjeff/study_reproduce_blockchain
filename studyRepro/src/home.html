@@ -36,19 +36,19 @@
   <div class="col-sm-6 col-md-4 col-lg-3">
     <div class="panel panel-default panel-pet">
       <div class="panel-heading">
-        <h4 class=".pet-title">
-          <span class="pet-para">Golden Retriever</span><br/>
+        <h4 class=".pet-title" id="testpara">
         </h4>
       </div>
       <div class="panel-body">
-        <strong>Test</strong>: <span class="pet-result">Golden Retriever</span><br/>
+        <strong>Test</strong>: <h4 id="petresult"></h4><br/>
         <br>
-        <strong>Area</strong>: <span class="pet-fields">3</span><br/>
+        <strong>Area</strong>: <h4 id="fieldName"></h4><br/>
         <br/><br/>
-        <button class="btn btn-default btn-adopt" type="button" data-id="0">Verified</button>
-        <button class="btn btn-default btn-adopt" type="button" data-id="1">Unverified</button>
+        <button class="btn btn-default btn-verify" type="button" data-id="0">Verified</button>
+        <button class="btn btn-default btn-unverify" type="button" data-id="1">Unverified</button>
       </div>
     </div>
+    <p id="accountAddress" class="text-center"></p>
   </div>
 </div>
 
@@ -58,6 +58,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/web3.min.js"></script>
 <script src="js/truffle-contract.js"></script>
-<script src="js/app.js"></script>
+<script src="js/testList.js"></script>
 </body>
 </html>

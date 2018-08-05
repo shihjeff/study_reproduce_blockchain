@@ -1,6 +1,7 @@
 App = {
   web3Provider: null,
   contracts: {},
+  account: null,
 
   init: function() {
     return App.initWeb3();
@@ -33,18 +34,29 @@ App = {
   render: function() {
     var PaperHelperInstance;
 
+    web3.eth.getCoinbase(function(err, account) {
+	if(err === null) {
+	  App.account = account;
+	}
+    });
+
     // Load contract data
     App.contracts.PaperHelper.deployed().then(function(instance) {
-      PaperHelperInstance = instance;
-      return PaperHelperInstance.papers;
-    }).then(function(papers) {
-      console.log(papers);
       $('#myTable').append('<table id="here_table"></table>');
       var table = $('#myTable').children();
-      table.append("<tr class='header'><th style='width:6%;'>Thesis</th><th style='width:6%;'>Ranking</th></tr>")
+      table.append("<tr class='header'><th style='width:6%;'>Thesis</th><th style='width:6%;'>Ranking</th></tr>");
+      PaperHelperInstance = instance;
+      var papers = PaperHelperInstance.getPapersByOwner(App.account);
       for (var i = 0; i < papers.length; i++) {
-         table.append( '<tr><td>' + papers[i] + '</td>' + '<td>' + 1 + '</td></tr>');
-      }
+        var Thesis = PaperHelperInstance.getPaperMetabyIdx(papers[i])[0];
+        var datas = PaperHelperInstance.getDatasByPaper(papers[i]);
+        var count = 0;
+        for (var j = 0; j < datas.length; j++) {
+	  var data = PaperHelperInstance.getDataMetabyIdx(datas[j]);
+          count += data[3] - data[4];
+        }
+        table.append( '<tr><td>' + Thesis + '</td>' + '<td>' + count + '</td></tr>');
+      } 
     }).catch(function(error) {
       console.warn(error);
     });

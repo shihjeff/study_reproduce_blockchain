@@ -60,4 +60,24 @@ contract PaperHelper is PaperSet {
     return (papers[paperId].Thesis, papers[paperId].Conclusion, papers[paperId].PaperField);
   }
 
+  function getPaperIdxbyField(string field) external view returns(uint[]) {
+    uint counter = 0;
+    uint i = 0;
+    for (i = 0; i < papers.length; i++) {
+      if (keccak256(papers[i].PaperField) == keccak256(field)) {
+        counter++;
+      }
+    }
+
+    uint[] memory result = new uint[](counter);
+    counter = 0;
+    for (i = 0; i < papers.length; i++) {
+      if (keccak256(papers[i].PaperField) == keccak256(field)) {
+        result[counter] = i;
+        counter++;
+      }
+    }
+    return result;
+  }
+
 }

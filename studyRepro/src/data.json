@@ -3,42 +3,56 @@
     "testId": 0,
     "testParameter": "Creativity of people at different temperature",
     "testResult": "People is more creative in temperature less than 60F",
-    "fields": "Personality Psycology"
+    "fields": "Personality Psycology",
+    "verification": "3",
+    "unverification": "1"
   },
   {
     "testId": 1,
     "testParameter": "Caffeine on athletic performance",
     "testResult": "Caffeine does not appear to benefit short term, high intensity exercise",
-    "fields": "Sports Psychology"
+    "fields": "Sports Psychology",
+    "verification": "1",
+    "unverification": "0"
   },
   {
     "testId": 3,
     "testParameter": "Behaviorial learning theories: Contiguity",
     "testResult": "Student making a good grade on a test after trying several different study techniques",
-    "fields": "Educational Psychology"
+    "fields": "Educational Psychology",
+    "verification": "1",
+    "unverification": "2"
   },
   {
     "testId": 4,
     "testParameter": "Gina",
     "testResult": "test",
-    "fields": "School Psychology"
+    "fields": "School Psychology",
+    "verification": "0",
+    "unverification": "0"
   },
   {
     "testId": 5,
     "testParameter": "Personalities and marrige",
     "testResult": "People tend to marry individuals with similar personalities",
-    "fields": "Personality Psycology"
+    "fields": "Personality Psycology",
+    "verification": "0",
+    "unverification": "2"
   },
   {
     "testId": 6,
     "testParameter": "Sports and heart disease",
     "testResult": "Causes of sudden cardiac death in young athletes",
-    "fields": "Sports Psychology"
+    "fields": "Sports Psychology",
+    "verification": "4",
+    "unverification": "2"
   },
   {
     "testId": 7,
     "testParameter": "People and Pet",
     "testResult": "Children love bigger size dog",
-    "fields": "Personality Psycology"
+    "fields": "Personality Psycology",
+    "verification": "1",
+    "unverification": "0"
   }
 ]

@@ -8,15 +8,15 @@ App = {
   },
 
   initWeb3: function() {
-    if (typeof web3 !== 'undefined') {
-      // If a web3 instance is already provided by Meta Mask.
-      App.web3Provider = web3.currentProvider;
-      web3 = new Web3(web3.currentProvider);
-    } else {
-      // Specify default instance if no web3 instance provided
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-      web3 = new Web3(App.web3Provider);
+    if (typeof web3 === 'undefined') {
+      const msg = "Couldn't detect web3. Make sure MetaMask is installed.";
+      alert(msg);
+      console.error(msg);
+      return;
     }
+    QuarkChain.injectWeb3(web3, "http://jrpc.testnet.quarkchain.io:38391");
+    web3 = new Web3(App.web3Provider);
+
     return App.initContract();
   },
 
@@ -61,7 +61,7 @@ App = {
           count += data[3] - data[4];
         }
         table.append( '<tr><td>' + Thesis + '</td>' + '<td>' + count + '</td></tr>');
-      } 
+      }
     }).catch(function(error) {
       console.warn(error);
     });

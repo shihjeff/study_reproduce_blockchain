@@ -7,15 +7,16 @@ App = {
     },
 
     initWeb3: function() {
-        if (typeof web3 !== 'undefined') {
-            App.web3Provider = web3.currentProvider;
-        } else {
-            // If no injected web3 instance is detected, fall back to Ganache
-            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-        }
-        web3 = new Web3(App.web3Provider);
+      if (typeof web3 === 'undefined') {
+        const msg = "Couldn't detect web3. Make sure MetaMask is installed.";
+        alert(msg);
+        console.error(msg);
+        return;
+      }
+      QuarkChain.injectWeb3(web3, "http://jrpc.testnet.quarkchain.io:38391");
+      web3 = new Web3(App.web3Provider);
 
-        return App.initContract();
+      return App.initContract();
     },
 
     initContract: function() {

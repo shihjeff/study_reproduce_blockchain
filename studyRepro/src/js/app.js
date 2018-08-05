@@ -1,20 +1,35 @@
+const IPFS = require("ipfs-api");
+const ipfs = new IPFS({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https"
+});
+const testData = "8803cf48b8805198dbf85b2e0d514320"; // random bytes for testing
+ipfs2.add(testData, (err, hash) => {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log("HASH: ", hash);
+});
+
 App = {
   web3Provider: null,
   contracts: {},
 
   init: function() {
     // Load pets.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
+    $.getJSON("../pets.json", function(data) {
+      var petsRow = $("#petsRow");
+      var petTemplate = $("#petTemplate");
 
-      for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
+      for (i = 0; i < data.length; i++) {
+        petTemplate.find(".panel-title").text(data[i].name);
+        petTemplate.find("img").attr("src", data[i].picture);
+        petTemplate.find(".pet-breed").text(data[i].breed);
+        petTemplate.find(".pet-age").text(data[i].age);
+        petTemplate.find(".pet-location").text(data[i].location);
+        petTemplate.find(".btn-adopt").attr("data-id", data[i].id);
 
         petsRow.append(petTemplate.html());
       }
@@ -40,7 +55,7 @@ App = {
   },
 
   bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    $(document).on("click", ".btn-adopt", App.handleAdopt);
   },
 
   markAdopted: function(adopters, account) {
@@ -52,13 +67,12 @@ App = {
   handleAdopt: function(event) {
     event.preventDefault();
 
-    var petId = parseInt($(event.target).data('id'));
+    var petId = parseInt($(event.target).data("id"));
 
     /*
      * Replace me...
      */
   }
-
 };
 
 $(function() {
